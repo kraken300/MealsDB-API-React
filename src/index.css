@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  transition: background-color 0.3s ease;
+}
+
+.dark {
+  background-color: #1a1a1a; 
+  color: white; 
+}
+
+.bg-rose-200 {
+  background-color: #f8bbd0; 
+}
+
+.bg-rose-500 {
+  background-color: #e91e63; 
+}
+
