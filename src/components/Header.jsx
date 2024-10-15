@@ -3,19 +3,16 @@ import { Link } from 'react-router-dom';
 
 const Header = ({ toggleTheme, isDarkMode }) => {
   return (
-    <header className={`p-4 ${isDarkMode ? 'bg-gray-800' : 'bg-rose-200'}`}>
+    <header className="bg-rose-200 p-4 dark:bg-gray-800 dark:text-white transition-colors duration-500">
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>MealDB App</h1>
-        <nav>
-          <Link to="/" className={`mx-4 ${isDarkMode ? 'text-white hover:text-rose-400' : 'text-gray-800 hover:text-rose-400'}`}>Home</Link>
-          <Link to="/favorites" className={`mx-4 ${isDarkMode ? 'text-white hover:text-rose-400' : 'text-gray-800 hover:text-rose-400'}`}>Favorites</Link>
+        <h1 className="text-3xl font-bold">MealDB App</h1>
+        <nav className="flex items-center">
+          <Link to="/" className="hover:text-rose-400 mx-4 ">Home</Link>
+          <Link to="/favorites" className="hover:text-rose-400">Favorites</Link>
+          <button onClick={toggleTheme} className="text-2xl ml-4">
+            {isDarkMode ? '☀️' : '🌙'}
+          </button>
         </nav>
-        <button 
-          onClick={toggleTheme} 
-          className={`p-2 rounded ${isDarkMode ? 'bg-rose-500 text-white' : 'bg-gray-800 text-white'}`}
-        >
-          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-        </button>
       </div>
     </header>
   );

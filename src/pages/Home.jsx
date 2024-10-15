@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Home = ({ isDarkMode }) => {
+const Home = () => {
   const [meals, setMeals] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
@@ -14,9 +14,7 @@ const Home = ({ isDarkMode }) => {
   const fetchMeals = async (search = '') => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`
-      );
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`);
       const data = await response.json();
       setMeals(data.meals || []);
     } catch (error) {
@@ -36,7 +34,8 @@ const Home = ({ isDarkMode }) => {
   };
 
   return (
-    <div className={`container mx-auto p-6 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+    <div className="container mx-auto p-6">
+      {/* Search Bar */}
       <div className="mb-8">
         <form onSubmit={handleSearch} className="flex justify-center">
           <input
@@ -44,27 +43,29 @@ const Home = ({ isDarkMode }) => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search for meals..."
-            className={`border border-gray-300 rounded-lg p-2 w-full max-w-md ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-800'}`}
+            className="border border-gray-300 rounded-lg p-2 w-full max-w-md dark:bg-gray-800 dark:text-white dark:border-gray-700"
           />
           <button
             type="submit"
-            className={`bg-rose-500 text-white px-4 py-2 ml-2 rounded-lg hover:bg-rose-600 ${isDarkMode ? 'bg-rose-600 hover:bg-rose-700' : ''}`}
+            className="bg-rose-500 text-white px-4 py-2 ml-2 rounded-lg hover:bg-rose-600"
           >
             Search
           </button>
         </form>
       </div>
 
+      {/* Loading Indicator */}
       {loading && (
-        <p className={`text-center ${isDarkMode ? 'text-white' : 'text-gray-700'}`}>Loading...</p>
+        <p className="text-center text-gray-700">Loading...</p>
       )}
 
+      {/* Meal Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {meals.length > 0 ? (
           meals.map((meal) => (
             <div
               key={meal.idMeal}
-              className={`rounded-lg shadow-lg overflow-hidden cursor-pointer ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}
+              className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer dark:bg-gray-800"
               onClick={() => handleNavigateToDetail(meal.idMeal)}
             >
               <div className="relative w-full pb-[100%]">
@@ -75,10 +76,10 @@ const Home = ({ isDarkMode }) => {
                 />
               </div>
               <div className="p-4">
-                <h2 className="text-xl font-bold">{meal.strMeal}</h2>
-                <p className="text-sm"><strong>Area:</strong> {meal.strArea}</p>
+                <h2 className="text-xl font-bold text-gray-800 dark:text-white">{meal.strMeal}</h2>
+                <p className="text-sm text-gray-600 dark:text-gray-300"><strong>Area:</strong> {meal.strArea}</p>
                 <p
-                  className={`mt-2 cursor-pointer hover:underline ${isDarkMode ? 'text-rose-400' : 'text-rose-500'}`}
+                  className="mt-2 text-rose-500 cursor-pointer hover:underline"
                   onClick={() => handleNavigateToDetail(meal.idMeal)}
                 >
                   View Recipe
@@ -87,7 +88,7 @@ const Home = ({ isDarkMode }) => {
             </div>
           ))
         ) : (
-          <p className={`text-center ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>No meals found.</p>
+          <p className="text-center text-gray-800 dark:text-gray-300">No meals found.</p>
         )}
       </div>
     </div>

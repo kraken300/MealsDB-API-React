@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const MealDetail = ({ isDarkMode }) => {
+const MealDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [meal, setMeal] = useState(null);
@@ -39,46 +39,46 @@ const MealDetail = ({ isDarkMode }) => {
   };
 
   const handleGoBack = () => {
-    navigate("/");
+    navigate(-1);
   };
 
   if (!meal) return <p>Loading...</p>;
 
   return (
-    <div className={`container mx-auto p-4 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+    <div className="container mx-auto p-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
       <button
         onClick={handleGoBack}
-        className="mb-2 bg-rose-500 text-white px-4 py-1 rounded-lg hover:bg-rose-600"
+        className="mb-4 bg-rose-500 text-white px-4 py-2 rounded-lg hover:bg-rose-600"
       >
         Back
       </button>
-      <div className={`flex flex-col md:flex-row rounded-lg shadow-lg p-4 ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
-        <div className="md:w-1/2 flex justify-center items-center">
+      <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg p-4 dark:bg-gray-800 transition-all duration-300">
+        <div className="md:w-1/2">
           <img
             src={meal.strMealThumb}
             alt={meal.strMeal}
-            className="w-full h-auto rounded-lg max-w-xs" 
+            className="w-full h-auto rounded-lg"
           />
         </div>
-        <div className="md:w-1/2 md:pl-2 flex flex-col justify-center items-start">
-          <h1 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>{meal.strMeal}</h1>
-          <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}><strong>Area:</strong> {meal.strArea}</p>
-          <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}><strong>Category:</strong> {meal.strCategory}</p>
+        <div className="md:w-1/2 md:pl-4 flex flex-col justify-center items-center text-center">
+          <h1 className="text-3xl font-bold text-gray-800 dark:text-white">{meal.strMeal}</h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300"><strong>Area:</strong> {meal.strArea}</p>
+          <p className="text-lg text-gray-600 dark:text-gray-300"><strong>Category:</strong> {meal.strCategory}</p>
           <button
             onClick={handleToggleFavorite}
-            className={`mt-2 text-white px-4 py-1 rounded-lg ${isFavorite ? 'bg-rose-500 hover:bg-rose-600' : 'bg-green-500 hover:bg-green-600'}`}
+            className={`mt-4 text-white px-4 py-2 rounded-lg ${isFavorite ? 'bg-rose-500 hover:bg-rose-600' : 'bg-green-500 hover:bg-green-600'}`}
           >
             {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
           </button>
         </div>
       </div>
-      <h2 className={`mt-2 text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Instructions</h2>
-      <p className={`text-gray-700 text-lg ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>{meal.strInstructions}</p>
+      <h2 className="mt-4 text-xl font-semibold dark:text-white">Instructions</h2>
+      <p className="text-gray-700 dark:text-gray-300">{meal.strInstructions}</p>
 
       {meal.strYoutube && (
         <div className="mt-4">
-          <h2 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Watch Video</h2>
-          <a href={meal.strYoutube} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+          <h2 className="text-xl font-semibold dark:text-white">Watch Video</h2>
+          <a href={meal.strYoutube} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">
             {meal.strYoutube}
           </a>
         </div>

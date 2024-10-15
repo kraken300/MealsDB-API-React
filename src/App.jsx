@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import MealDetail from './pages/MealDetail';
+import { useEffect, useState } from 'react';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -31,12 +31,12 @@ function App() {
 
   return (
     <Router>
-      <Header toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
-      <div className={isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-800'}>
+      <div className={`min-h-screen transition-colors duration-500 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'}`}>
+        <Header toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
         <Routes>
-          <Route path="/" element={<Home isDarkMode={isDarkMode} />} />
-          <Route path="/favorites" element={<Favorites isDarkMode={isDarkMode} />} />
-          <Route path="/meal/:id" element={<MealDetail isDarkMode={isDarkMode} />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/meal/:id" element={<MealDetail />} />
         </Routes>
       </div>
     </Router>
