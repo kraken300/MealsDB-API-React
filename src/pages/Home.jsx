@@ -35,7 +35,7 @@ const Home = () => {
 
   return (
     <div className="container mx-auto p-6">
-      {/* Search Bar */}
+      
       <div className="mb-8">
         <form onSubmit={handleSearch} className="flex justify-center">
           <input
@@ -54,12 +54,10 @@ const Home = () => {
         </form>
       </div>
 
-      {/* Loading Indicator */}
       {loading && (
         <p className="text-center text-gray-700">Loading...</p>
       )}
 
-      {/* Meal Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {meals.length > 0 ? (
           meals.map((meal) => (
